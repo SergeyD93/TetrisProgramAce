@@ -1,0 +1,55 @@
+Base path: E:/Program Files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-11-21388
+Cmd: getPlatforms
+Cmd: preprocess
+  insize=370 outsize=367 ok=1
+Cmd: preprocess
+  insize=355 outsize=352 ok=1
+Cmd: preprocess
+  insize=334 outsize=331 ok=1
+Cmd: preprocess
+  insize=315 outsize=312 ok=1
+Cmd: preprocess
+  insize=334 outsize=331 ok=1
+Cmd: preprocess
+  insize=314 outsize=311 ok=1
+Cmd: preprocess
+  insize=296 outsize=293 ok=1
+Cmd: preprocess
+  insize=274 outsize=271 ok=1
+Cmd: preprocess
+  insize=314 outsize=311 ok=1
+Cmd: preprocess
+  insize=274 outsize=271 ok=1
+Cmd: preprocess
+  insize=511 outsize=508 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6731 outsize=3663 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6731 outsize=1314 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3569 outsize=2753 kw=DIRECTIONAL ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3569 outsize=1168 kw=DIRECTIONAL ok=1
+Cmd: preprocess
+  insize=513 outsize=510 ok=1
+Cmd: preprocess
+  insize=515 outsize=512 ok=1
+Cmd: preprocess
+  insize=513 outsize=510 ok=1
+Cmd: preprocess
+  insize=489 outsize=486 ok=1
+Cmd: preprocess
+  insize=486 outsize=483 ok=1
+Cmd: preprocess
+  insize=488 outsize=485 ok=1
+Cmd: preprocess
+  insize=175 outsize=172 ok=1
+Cmd: preprocess
+  insize=196 outsize=193 ok=1
+Cmd: preprocess
+  insize=211 outsize=208 ok=1
+Cmd: preprocess
+  insize=244 outsize=241 ok=1
+Cmd: preprocess
+  insize=299 outsize=296 ok=1

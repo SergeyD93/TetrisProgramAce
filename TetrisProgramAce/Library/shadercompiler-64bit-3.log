@@ -1,0 +1,20 @@
+Base path: E:/Program Files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-3-21388
+Cmd: getPlatforms
+Cmd: preprocess
+  error: 2 plat 16 at (19): Syntax error
+  insize=389 outsize=315 ok=0
+Cmd: preprocess
+  error: 2 plat 16 at (19): Syntax error
+  insize=390 outsize=315 ok=0
+Cmd: preprocess
+  error: 2 plat 16 at (19): Syntax error
+  insize=402 outsize=315 ok=0
+Cmd: preprocess
+  error: 2 plat 16 at (19): Syntax error
+  insize=383 outsize=315 ok=0
+Cmd: preprocess
+  insize=1007 outsize=1289 ok=1
+Cmd: preprocess
+  insize=1012 outsize=1294 ok=1
+Cmd: preprocess

@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\Custom\TransparentCustomShader.shader">
+    <Files>
+      <File FileName="Assets\ProjectAssets\Scripts\GUI\MainMenu.cs" Line="8" Column="1" />
+      <File FileName="Assets\Shaders\Custom\BasicDiffuse.shader" Line="29" Column="2" />
+      <File FileName="Assets\Shaders\Custom\TransparentCustomShader.shader" Line="11" Column="15" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
