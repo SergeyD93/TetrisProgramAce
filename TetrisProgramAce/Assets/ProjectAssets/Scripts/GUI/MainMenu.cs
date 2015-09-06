@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainMenu : MonoBehaviour
+namespace Tetris
 {
-	public void StartGame()
-	{
-		Application.LoadLevel("GameField");
-	}
-
-	public void Exit()
-	{
-		Application.Quit();
-	}
+    public class MainMenu : MonoBehaviour
+    {
+        
+    }
 }

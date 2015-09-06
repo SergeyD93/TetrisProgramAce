@@ -46,8 +46,19 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ProjectAssets\Scripts\Common\Initializer.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\GUI\MainMenu.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\RayTest.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\ShaderUsing.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot_states.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\AppState.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FigureController.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FigureCreator.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\AbstractFigure.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\Jfigure.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\GameState.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\MainMenuState\MainMenuState.cs" />
      <None Include="Assets\Shaders\Custom\TransparentCustomShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
