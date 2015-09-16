@@ -46,17 +46,20 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ProjectAssets\Scripts\Common\Initializer.cs" />
+     <Compile Include="Assets\CommonScripts\UserData.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\GUI\MainMenu.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\RayTest.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\ShaderUsing.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot_custom.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot_states.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppState.cs" />
-     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FigureController.cs" />
-     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FigureCreator.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\AbstractFigureController.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\BlocksDestroyer.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\AbstractFigure.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\IfigureController.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\Jfigure.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FiguresManager.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\GameState.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\MainMenuState\MainMenuState.cs" />
      <None Include="Assets\Shaders\Custom\TransparentCustomShader.shader" />

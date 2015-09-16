@@ -9,15 +9,5 @@ namespace Tetris
         {
             Application.LoadLevel("MainMenu");
         }
-
-        public void StartGame()
-        {
-            AppRoot.Instance.SetState(EAppStateId.Game);
-        }
-
-        public void Exit()
-        {
-            Application.Quit();
-        }
     }
 }

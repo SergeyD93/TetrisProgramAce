@@ -8,36 +8,39 @@ public interface IStateData
 
 namespace Tetris
 {
-    public class AppState : MonoBehaviour
+    public abstract class AppState
     {
 
         public EAppStateId mId;
 
-        public virtual void Activate(IStateData data, bool resetState)
-        {
-
-        }
+        public abstract void Activate(IStateData data, bool resetState);
 
         public void Deactivate()
         {
 
         }
 
-        public void Update()
+        public virtual void Update()
         {
 
         }
 
         public void Initialize()
         {
-
         
         }
+
 
         public void OnGUI()
         {
         
         }
+
+        public virtual void OnLevelWasLoaded(int level)
+        {
+        
+        }
+
 
         public void OnUiAction(GameObject pressedGo, object p)
         {

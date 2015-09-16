@@ -3,8 +3,17 @@ using System.Collections;
 
 namespace Tetris
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : ScriptableObject
     {
-        
+
+        public void StartGame()
+        {
+            AppRoot.Instance.SetState(EAppStateId.Game);
+        }
+
+        public void Exit()
+        {
+            Application.Quit();
+        }
     }
 }

@@ -2,186 +2,201 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class AbstractFigure : MonoBehaviour 
+namespace Tetris
 {
-    protected Dictionary<GameObject, Vector2> cubesPositionsDictionary0 = new Dictionary<GameObject, Vector2>();
-    protected Dictionary<GameObject, Vector2> cubesPositionsDictionary1 = new Dictionary<GameObject, Vector2>();
-    protected Dictionary<GameObject, Vector2> cubesPositionsDictionary2 = new Dictionary<GameObject, Vector2>();
-    protected Dictionary<GameObject, Vector2> cubesPositionsDictionary3 = new Dictionary<GameObject, Vector2>();
+    public delegate void EventDelegate();
 
-    protected GameObject Cube0;
-    protected GameObject Cube1;
-    protected GameObject Cube2;
-    protected GameObject Cube3;
-
-    protected List<Dictionary<GameObject, Vector2>> mPositionsList;
-    List<GameObject> mDetailsList;
-
-    protected int mPositionIndex = 0;
-    protected int mNumOfPositions;
-
-    protected void Start()
+    public abstract class AbstractFigure : MonoBehaviour
     {
-        Cube0 = transform.FindChild("Cube0").gameObject;
-        Cube1 = transform.FindChild("Cube1").gameObject;
-        Cube2 = transform.FindChild("Cube2").gameObject;
-        Cube3 = transform.FindChild("Cube3").gameObject;
+        public event EventDelegate FigureDropped;
 
-        mDetailsList = new List<GameObject>();
+        protected Dictionary<GameObject, Vector2> cubesPositionsDictionary0 = new Dictionary<GameObject, Vector2>();
+        protected Dictionary<GameObject, Vector2> cubesPositionsDictionary1 = new Dictionary<GameObject, Vector2>();
+        protected Dictionary<GameObject, Vector2> cubesPositionsDictionary2 = new Dictionary<GameObject, Vector2>();
+        protected Dictionary<GameObject, Vector2> cubesPositionsDictionary3 = new Dictionary<GameObject, Vector2>();
 
-        mDetailsList.Add(Cube0);
-        mDetailsList.Add(Cube1);
-        mDetailsList.Add(Cube2);
-        mDetailsList.Add(Cube3);
+        protected GameObject Cube0;
+        protected GameObject Cube1;
+        protected GameObject Cube2;
+        protected GameObject Cube3;
 
-        mPositionsList = new List<Dictionary<GameObject, Vector2>>();
-        InitPositions();
-        StartCoroutine("TakeStep"); //start moving
-    }
+        protected List<Dictionary<GameObject, Vector2>> mPositionsList;
+        List<GameObject> mDetailsList;
 
-    protected abstract void InitPositions();
+        protected int mPositionIndex = 0;
+        protected int mNumOfPositions;
 
-    IEnumerator TakeStep()
-    {
-        transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+        private float mStepTime = 0.5f;
 
-        yield return new WaitForSeconds(0.5f);
-
-        if (CheckBottomCollisiom() == false)
+        protected void Start()
         {
-            StartCoroutine("TakeStep");
+            Cube0 = transform.FindChild("Cube0").gameObject;
+            Cube1 = transform.FindChild("Cube1").gameObject;
+            Cube2 = transform.FindChild("Cube2").gameObject;
+            Cube3 = transform.FindChild("Cube3").gameObject;
+
+            mDetailsList = new List<GameObject>();
+
+            mDetailsList.Add(Cube0);
+            mDetailsList.Add(Cube1);
+            mDetailsList.Add(Cube2);
+            mDetailsList.Add(Cube3);
+
+            mPositionsList = new List<Dictionary<GameObject, Vector2>>();
+            InitPositions();
+            StartCoroutine("TakeStep"); //start moving
         }
-        else
+
+        protected abstract void InitPositions();
+
+        IEnumerator TakeStep()
         {
-            this.tag = "Untagged";
-            foreach (GameObject cube in mDetailsList)
+            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+
+            yield return new WaitForSeconds(mStepTime);
+
+            if (CheckBottomCollisiom() == false)
             {
-                cube.tag = "Untagged";
-            }
-        }
-    }
-
-    protected void Update ()
-    {
-        CheckPressedKeys();
-    }
-
-    void CheckPressedKeys()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            MoveLeft();
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            MoveRight();
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow)) //Input.GetKeyDown(KeyCode.Space))
-        {
-            RotateFigure();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CheckCanRotate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-
-        }
-    }
-
-    void MoveLeft()
-    {
-        if (CheckCanOffset(Vector3.left) == true)
-        {
-            transform.position = new Vector2(transform.position.x - 1, transform.position.y);
-        }
-    }
-
-    void MoveRight()
-    {
-        if (CheckCanOffset(Vector3.right) == true)
-        {
-            transform.position = new Vector2(transform.position.x + 1, transform.position.y);
-        }
-    }
-
-    void RotateFigure()
-    {
-        if (CheckCanRotate() == true)
-        {
-            if (mNumOfPositions != null)
-            {
-                mPositionIndex++;
-                if (mPositionIndex >= mNumOfPositions)
-                {
-                    mPositionIndex = 0;
-                }
+                StartCoroutine("TakeStep");
             }
             else
             {
-                Debug.LogError("Determine mNumOfPositions in child");
-            }
-
-            foreach (KeyValuePair<GameObject, Vector2> cube in mPositionsList[mPositionIndex])
-            {
-                cube.Key.transform.localPosition = cube.Value;
-            }
-        }
-    }
-
-    protected abstract bool CheckCanRotate();
-
-    bool CheckBottomCollisiom()
-    {
-        Vector3 direction = Vector3.down;
-        foreach (GameObject cube in mDetailsList)
-        {
-            Ray ray = new Ray(cube.transform.position, direction);
-            bool rayHited = CheckRaycastHit(ray, 1.0f);
-            if (rayHited == true)
-            {
-                return true;
+                this.tag = "DroppedFigure";
+                foreach (GameObject cube in mDetailsList)
+                {
+                    cube.tag = "DroppedCube";
+                }
+                FigureDropped();
+                Component.Destroy(GetComponent<Rigidbody>());
             }
         }
-        return false;
-    }
 
-    bool CheckCanOffset(Vector3 direction) 
-    {
-        if(this.tag != "CurentFigure")
+        protected void Update()
         {
+            CheckPressedKeys();
+        }
+
+        void CheckPressedKeys()
+        {
+            if (this.tag != "CurentFigure")
+            {
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                MoveLeft();
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                MoveRight();
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow)) //Input.GetKeyDown(KeyCode.Space))
+            {
+                RotateFigure();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CheckCanRotate();
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                mStepTime = 0.1f;
+            }
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                mStepTime = 0.5f;
+            }
+        }
+
+        void MoveLeft()
+        {
+            if (CheckCanOffset(Vector3.left) == true)
+            {
+                transform.position = new Vector2(transform.position.x - 1, transform.position.y);
+            }
+        }
+
+        void MoveRight()
+        {
+            if (CheckCanOffset(Vector3.right) == true)
+            {
+                transform.position = new Vector2(transform.position.x + 1, transform.position.y);
+            }
+        }
+
+        void RotateFigure()
+        {
+            if (CheckCanRotate() == true)
+            {
+                if (mNumOfPositions > 0)
+                {
+                    mPositionIndex++;
+                    if (mPositionIndex >= mNumOfPositions)
+                    {
+                        mPositionIndex = 0;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Determine mNumOfPositions in child");
+                }
+
+                foreach (KeyValuePair<GameObject, Vector2> cube in mPositionsList[mPositionIndex])
+                {
+                    cube.Key.transform.localPosition = cube.Value;
+                }
+            }
+        }
+
+        protected abstract bool CheckCanRotate();
+
+        bool CheckBottomCollisiom()
+        {
+            Vector3 direction = Vector3.down;
+            foreach (GameObject cube in mDetailsList)
+            {
+                Ray ray = new Ray(cube.transform.position, direction);
+                bool rayHited = CheckRaycastHit(ray, 1.0f);
+                if (rayHited == true)
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
-        foreach(GameObject cube in mDetailsList)
+        bool CheckCanOffset(Vector3 direction)
         {
-            Ray ray = new Ray(cube.transform.position, direction);
-            bool rayHited = CheckRaycastHit(ray, 1.0f);
-            if (rayHited == true)
+            foreach (GameObject cube in mDetailsList)
             {
-                return false;
+                Ray ray = new Ray(cube.transform.position, direction);
+                bool rayHited = CheckRaycastHit(ray, 1.0f);
+                if (rayHited == true)
+                {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-    }
 
-    protected bool CheckRaycastHit(Ray ray, float rayDistance)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        protected bool CheckRaycastHit(Ray ray, float rayDistance)
         {
-            if (hit.transform.tag != "CurentFigure")
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, rayDistance))
             {
-                Debug.Log(this.name + " ray hit: " + hit.transform.name);
-                return true;
+                if (hit.transform.tag != "CurentFigure")
+                {
+                    Debug.Log(this.name + " ray hit: " + hit.transform.name);
+                    return true;
+                }
             }
+            Debug.DrawRay(ray.origin, ray.direction, Color.red, rayDistance);
+            return false;
         }
-        Debug.DrawRay(ray.origin, ray.direction, Color.red, rayDistance);
-        return false;
     }
 }
