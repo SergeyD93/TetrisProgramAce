@@ -7,46 +7,141 @@ namespace Tetris
 {
     public class FiguresManager
     {
-        private GameObject mFigure;
+        private GameObject mFigure0;
+        private GameObject mFigure1;
         private GameObject mCurentFigure;
-        private BlocksDestroyer mBlocksDestroyer;
+        
         private AbstractFigureController mCurentFigureController;
+        private AbstractFigureController mNextFigureController;
+
+        private FiguresGenerator mFiguresCreator;
+        private BlocksDestroyer mBlocksDestroyer;
 
         private List<int> mPositionsForDestroyingList;
         private List<GameObject> mBlocksForDestroying;
+        private string mPathToFigure;
 
         public FiguresManager()
         {
-            CreateFigure();
-
+            mFiguresCreator = new FiguresGenerator();
             mBlocksDestroyer = new BlocksDestroyer();
             mBlocksDestroyer.BlockDestroyed += OnAllBlocksDestroyed;
 
+            CreateFigure();
+        }
+
+        /*void Create1Figure()
+        {
+            mFiguresCreator.GetFigurePathAndControllerType (out mCurentFigureController, out mPathToFigure);
+
+            if (mCurentFigureController == null || mPathToFigure == null)
+            {
+                Debug.LogError("[FiguresManager]: mCurentFigureController or mPathToFigure is null");
+            }
+            else
+            {
+                if (mFigure0 != mCurentFigure)
+                {
+                    mFigure0 = LoadFigure(mPathToFigure);
+                    if (mFigure0 != null)
+                    {
+                        mFigure0.transform.position = new Vector2(0, 22);
+                        mCurentFigureController.SetFigure(mFigure0);
+                        mCurentFigureController.FigureDropped += CheckFullLines;
+                    }
+                    else
+                    {
+                        Debug.LogError("[FiguresManager]: mFigure is null");
+                    }
+                }
+                else
+                {
+                    mFigure1 = LoadFigure(mPathToFigure);
+                    if (mFigure1 != null)
+                    {
+                        mFigure1.transform.position = new Vector2(0, 22);
+                        mCurentFigureController.SetFigure(mFigure1);
+                        mCurentFigureController.FigureDropped += CheckFullLines;
+                    }
+                    else
+                    {
+                        Debug.LogError("[FiguresManager]: mFigure is null");
+                    }
+                }
+                
+            }
+        }*/
+
+        void CreateFigure()
+        {
+            mFiguresCreator.GetFigurePathAndControllerType(out mNextFigureController, out mPathToFigure);
+            if (mNextFigureController == null || mPathToFigure == null)
+            {
+                Debug.LogError("[FiguresManager]: mNextFigureController or mPathToFigure is null");
+            }
+            else
+            {
+                if (mFigure0 != mCurentFigure)
+                {
+                    mFigure0 = LoadFigure(mPathToFigure);
+                    if (mFigure0 != null)
+                    {
+                        mFigure0.transform.position = new Vector2(10, 15);
+                        mCurentFigure = mFigure0;
+                    }
+                    else
+                    {
+                        Debug.LogError("[FiguresManager]: mCurentFigure is null");
+                    }
+                }
+                else
+                {
+                    mFigure1 = LoadFigure(mPathToFigure);
+                    if (mFigure1 != null)
+                    {
+                        mFigure1.transform.position = new Vector2(10, 15);
+                        mFigure1.transform.position = new Vector2(10, 15);
+                    }
+                    else
+                    {
+                        Debug.LogError("[FiguresManager]: mCurentFigure is null");
+                    }
+                }
+            }
+            if(mCurentFigureController == null)
+            {
+                SetCurentFigure();
+                //CreateFigure();
+            }
+        }
+
+        void SetCurentFigure()
+        {
+            if(mFigure0 != mCurentFigure)
+            {
+                mCurentFigureController = mNextFigureController;
+                mFigure0.transform.position = new Vector2(0, 22);
+                mCurentFigureController.SetFigure(mFigure0);
+                mCurentFigureController.FigureDropped += CheckFullLines;
+            }
+            else
+            {
+                mCurentFigureController = mNextFigureController;
+                mFigure1.transform.position = new Vector2(0, 22);
+                mCurentFigureController.SetFigure(mFigure1);
+                mCurentFigureController.FigureDropped += CheckFullLines;
+            }
+            CreateFigure();
+        }
+
+        GameObject LoadFigure(string path)
+        {
+            return GameObject.Instantiate(Resources.Load(path) as GameObject);
         }
 
         public void Update()
         {
             mCurentFigureController.CheckPressedKeys();
-        }
-
-        void CreateFigure()
-        {
-            mFigure = Resources.Load("Figures/Ifigure") as GameObject;
-
-            if (mFigure != null)
-            {
-                
-                mCurentFigure = GameObject.Instantiate(mFigure);
-                mCurentFigureController = new IfigureController(mCurentFigure);
-
-                mCurentFigureController.FigureDropped += CheckFullLines;
-                mCurentFigure.transform.position = new Vector2(0, 22);
-                
-            }
-            else
-            {
-                Debug.LogError("[FigureCreator]: mFigure is null");
-            }
         }
 
         void CheckFullLines()
@@ -85,7 +180,8 @@ namespace Tetris
             }
             else
             {
-                CreateFigure();
+                //CreateFigure();
+                SetCurentFigure();
             }
         }
 
@@ -93,7 +189,8 @@ namespace Tetris
         {
             MoveBlocksDown(mPositionsForDestroyingList);
             DestroyEmptyFigures();
-            CreateFigure();
+            SetCurentFigure();
+            //CreateFigure();
         }
 
         private void MoveBlocksDown(List<int> destroyedPositions)

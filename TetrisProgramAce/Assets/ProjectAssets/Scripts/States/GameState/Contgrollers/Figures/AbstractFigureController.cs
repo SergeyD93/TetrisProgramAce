@@ -6,8 +6,10 @@ namespace Tetris
 {
     public delegate void EventDelegate();
 
-    public abstract class AbstractFigure : MonoBehaviour
+    public abstract class AbstractFigureController
     {
+        private GameObject mCurentFigure;
+
         public event EventDelegate FigureDropped;
 
         protected Dictionary<GameObject, Vector2> cubesPositionsDictionary0 = new Dictionary<GameObject, Vector2>();
@@ -28,12 +30,24 @@ namespace Tetris
 
         private float mStepTime = 0.5f;
 
-        protected void Start()
+        public AbstractFigureController()
         {
-            Cube0 = transform.FindChild("Cube0").gameObject;
-            Cube1 = transform.FindChild("Cube1").gameObject;
-            Cube2 = transform.FindChild("Cube2").gameObject;
-            Cube3 = transform.FindChild("Cube3").gameObject;
+        
+        }
+
+        public AbstractFigureController(GameObject figure)
+        {
+            SetFigure(figure);
+        }
+
+        public void SetFigure(GameObject figure)
+        {
+            mCurentFigure = figure;
+
+            Cube0 = mCurentFigure.transform.FindChild("Cube0").gameObject;
+            Cube1 = mCurentFigure.transform.FindChild("Cube1").gameObject;
+            Cube2 = mCurentFigure.transform.FindChild("Cube2").gameObject;
+            Cube3 = mCurentFigure.transform.FindChild("Cube3").gameObject;
 
             mDetailsList = new List<GameObject>();
 
@@ -44,41 +58,35 @@ namespace Tetris
 
             mPositionsList = new List<Dictionary<GameObject, Vector2>>();
             InitPositions();
-            StartCoroutine("TakeStep"); //start moving
+            AppRoot.Instance.StartChildCoroutine(TakeStep()); //start moving
         }
 
         protected abstract void InitPositions();
 
         IEnumerator TakeStep()
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - 1);
+            mCurentFigure.transform.position = new Vector2(mCurentFigure.transform.position.x, mCurentFigure.transform.position.y - 1);
 
             yield return new WaitForSeconds(mStepTime);
 
             if (CheckBottomCollisiom() == false)
             {
-                StartCoroutine("TakeStep");
+                AppRoot.Instance.StartChildCoroutine(TakeStep());
             }
             else
             {
-                this.tag = "DroppedFigure";
+                mCurentFigure.tag = "DroppedFigure";
                 foreach (GameObject cube in mDetailsList)
                 {
                     cube.tag = "DroppedCube";
                 }
                 FigureDropped();
-                Component.Destroy(GetComponent<Rigidbody>());
             }
         }
 
-        protected void Update()
+        public void CheckPressedKeys()
         {
-            CheckPressedKeys();
-        }
-
-        void CheckPressedKeys()
-        {
-            if (this.tag != "CurentFigure")
+            if (mCurentFigure.transform.tag != "CurentFigure")
             {
                 return;
             }
@@ -117,7 +125,7 @@ namespace Tetris
         {
             if (CheckCanOffset(Vector3.left) == true)
             {
-                transform.position = new Vector2(transform.position.x - 1, transform.position.y);
+                mCurentFigure.transform.position = new Vector2(mCurentFigure.transform.position.x - 1, mCurentFigure.transform.position.y);
             }
         }
 
@@ -125,7 +133,7 @@ namespace Tetris
         {
             if (CheckCanOffset(Vector3.right) == true)
             {
-                transform.position = new Vector2(transform.position.x + 1, transform.position.y);
+                mCurentFigure.transform.position = new Vector2(mCurentFigure.transform.position.x + 1, mCurentFigure.transform.position.y);
             }
         }
 
@@ -191,12 +199,22 @@ namespace Tetris
             {
                 if (hit.transform.tag != "CurentFigure")
                 {
-                    Debug.Log(this.name + " ray hit: " + hit.transform.name);
+                    Debug.Log(mCurentFigure.name + " ray hit: " + hit.transform.name);
                     return true;
                 }
             }
             Debug.DrawRay(ray.origin, ray.direction, Color.red, rayDistance);
             return false;
+        }
+
+        public GameObject GetFigure()
+        {
+            if (mCurentFigure != null)
+            {
+                return mCurentFigure;
+            }
+            Debug.LogError(this + " mCurentFigure is null");
+            return null;
         }
     }
 }

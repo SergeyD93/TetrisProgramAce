@@ -4,9 +4,14 @@ using System.Collections.Generic;
 
 namespace Tetris
 {
-    public class Jfigure : AbstractFigureController
+    public class LfigureController : AbstractFigureController
     {
-        public Jfigure(GameObject figure) : base(figure)
+        public LfigureController()
+        {
+        
+        }
+
+        public LfigureController(GameObject figure) : base(figure)
         {
         
         }
@@ -18,22 +23,22 @@ namespace Tetris
             cubesPositionsDictionary0.Add(Cube0, new Vector2(0, 0));
             cubesPositionsDictionary0.Add(Cube1, new Vector2(0, 1));
             cubesPositionsDictionary0.Add(Cube2, new Vector2(0, -1));
-            cubesPositionsDictionary0.Add(Cube3, new Vector2(-1, -1));
+            cubesPositionsDictionary0.Add(Cube3, new Vector2(1, -1));
 
             cubesPositionsDictionary1.Add(Cube0, new Vector2(0, 0));
             cubesPositionsDictionary1.Add(Cube1, new Vector2(1, 0));
             cubesPositionsDictionary1.Add(Cube2, new Vector2(-1, 0));
-            cubesPositionsDictionary1.Add(Cube3, new Vector2(-1, 1));
+            cubesPositionsDictionary1.Add(Cube3, new Vector2(-1, -1));
 
             cubesPositionsDictionary2.Add(Cube0, new Vector2(0, 0));
             cubesPositionsDictionary2.Add(Cube1, new Vector2(0, -1));
             cubesPositionsDictionary2.Add(Cube2, new Vector2(0, 1));
-            cubesPositionsDictionary2.Add(Cube3, new Vector2(1, 1));
+            cubesPositionsDictionary2.Add(Cube3, new Vector2(-1, 1));
 
             cubesPositionsDictionary3.Add(Cube0, new Vector2(0, 0));
             cubesPositionsDictionary3.Add(Cube1, new Vector2(-1, 0));
             cubesPositionsDictionary3.Add(Cube2, new Vector2(1, 0));
-            cubesPositionsDictionary3.Add(Cube3, new Vector2(1, -1));
+            cubesPositionsDictionary3.Add(Cube3, new Vector2(1, 1));
 
             mPositionsList.Add(cubesPositionsDictionary0);
             mPositionsList.Add(cubesPositionsDictionary1);
@@ -51,7 +56,7 @@ namespace Tetris
 
             ray0.origin = Cube0.transform.position;
             ray1.origin = Cube0.transform.position;
-            ray2.origin = Cube1.transform.position;
+            ray2.origin = Cube2.transform.position;
 
             switch (mPositionIndex)
             {
