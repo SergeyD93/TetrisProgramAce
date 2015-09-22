@@ -43,25 +43,30 @@ namespace Tetris
         public bool OnUiAction(GameObject pressedGo, object p)
         {
             OnUIActionStates(pressedGo, p); 
-			print (pressedGo.name);
+            print (pressedGo.name);
             return false;
         }
 
 
-		/*public void Pause()
-		{
-			SetState(EAppStateId.Pause, new ScoreData() { Score =  (mStates[EAppStateId.Game] as GameState).Score });
-		}
-		
-		public void Unpause()
-		{
-			SetState(EAppStateId.Game);
-		}
-		
-		public void Restart()
-		{
-			AppRoot.Instance.SetState(EAppStateId.Game, true);
-		}*/
+        /*public void Pause() ?????
+        {
+            SetState(EAppStateId.Pause, new ScoreData() { Score = (mStates[EAppStateId.Game] as GameState).Score });
+        }*/
+
+        public void Pause()
+        {
+            SetState(EAppStateId.Pause);
+        }
+
+        public void Unpause()
+        {
+            SetState(EAppStateId.Game);
+        }
+        
+        public void Restart()
+        {
+            AppRoot.Instance.SetState(EAppStateId.Game, true);
+        }
 
         #endregion
         ///////////////////////////////////////////////////////////////////////////
@@ -92,7 +97,8 @@ namespace Tetris
     public enum EAppStateId
     {
         MainMenu = 0,
-        Game
+        Game,
+        Pause
     };
     #endregion
     ///////////////////////////////////////////////////////////////////////////

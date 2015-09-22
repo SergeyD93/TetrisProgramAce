@@ -69,23 +69,31 @@ namespace Tetris
 
             yield return new WaitForSeconds(mStepTime);
 
-            if (CheckBottomCollisiom() == false)
+            if (mCurentFigure != null)
             {
-                AppRoot.Instance.StartChildCoroutine(TakeStep());
-            }
-            else
-            {
-                mCurentFigure.tag = "DroppedFigure";
-                foreach (GameObject cube in mDetailsList)
+                if (CheckBottomCollisiom() == false)
                 {
-                    cube.tag = "DroppedCube";
+                    AppRoot.Instance.StartChildCoroutine(TakeStep());
                 }
-                FigureDropped();
+                else
+                {
+                    mCurentFigure.tag = "DroppedFigure";
+                    foreach (GameObject cube in mDetailsList)
+                    {
+                        cube.tag = "DroppedCube";
+                    }
+                    FigureDropped();
+                }
             }
         }
 
         public void CheckPressedKeys()
         {
+            if (mCurentFigure == null)
+            {
+                return;
+            }
+
             if (mCurentFigure.transform.tag != "CurentFigure")
             {
                 return;
@@ -101,15 +109,15 @@ namespace Tetris
                 MoveRight();
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow)) //Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
             {
                 RotateFigure();
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            /*if (Input.GetKeyDown(KeyCode.Space))
             {
                 CheckCanRotate();
-            }
+            }*/
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {

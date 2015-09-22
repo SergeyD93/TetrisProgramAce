@@ -5,10 +5,9 @@ namespace Tetris
 {
     public class MainMenu : ScriptableObject
     {
-
         public void StartGame()
         {
-            AppRoot.Instance.SetState(EAppStateId.Game);
+            AppRoot.Instance.SetState(EAppStateId.Game, true);
         }
 
         public void Exit()

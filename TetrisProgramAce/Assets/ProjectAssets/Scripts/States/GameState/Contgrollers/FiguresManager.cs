@@ -30,48 +30,6 @@ namespace Tetris
             CreateFigure();
         }
 
-        /*void Create1Figure()
-        {
-            mFiguresCreator.GetFigurePathAndControllerType (out mCurentFigureController, out mPathToFigure);
-
-            if (mCurentFigureController == null || mPathToFigure == null)
-            {
-                Debug.LogError("[FiguresManager]: mCurentFigureController or mPathToFigure is null");
-            }
-            else
-            {
-                if (mFigure0 != mCurentFigure)
-                {
-                    mFigure0 = LoadFigure(mPathToFigure);
-                    if (mFigure0 != null)
-                    {
-                        mFigure0.transform.position = new Vector2(0, 22);
-                        mCurentFigureController.SetFigure(mFigure0);
-                        mCurentFigureController.FigureDropped += CheckFullLines;
-                    }
-                    else
-                    {
-                        Debug.LogError("[FiguresManager]: mFigure is null");
-                    }
-                }
-                else
-                {
-                    mFigure1 = LoadFigure(mPathToFigure);
-                    if (mFigure1 != null)
-                    {
-                        mFigure1.transform.position = new Vector2(0, 22);
-                        mCurentFigureController.SetFigure(mFigure1);
-                        mCurentFigureController.FigureDropped += CheckFullLines;
-                    }
-                    else
-                    {
-                        Debug.LogError("[FiguresManager]: mFigure is null");
-                    }
-                }
-                
-            }
-        }*/
-
         void CreateFigure()
         {
             mFiguresCreator.GetFigurePathAndControllerType(out mNextFigureController, out mPathToFigure);
@@ -111,7 +69,6 @@ namespace Tetris
             if(mCurentFigureController == null)
             {
                 SetCurentFigure();
-                //CreateFigure();
             }
         }
 
@@ -180,7 +137,6 @@ namespace Tetris
             }
             else
             {
-                //CreateFigure();
                 SetCurentFigure();
             }
         }
@@ -190,7 +146,6 @@ namespace Tetris
             MoveBlocksDown(mPositionsForDestroyingList);
             DestroyEmptyFigures();
             SetCurentFigure();
-            //CreateFigure();
         }
 
         private void MoveBlocksDown(List<int> destroyedPositions)

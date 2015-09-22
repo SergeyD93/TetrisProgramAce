@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\CommonScripts\UserData.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\GUI\MainMenu.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\GUI\PauseMenu.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\RayTest.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\ShaderUsing.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FiguresManager.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\GameState.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\MainMenuState\MainMenuState.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\PauseState.cs" />
      <None Include="Assets\Shaders\Custom\TransparentCustomShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

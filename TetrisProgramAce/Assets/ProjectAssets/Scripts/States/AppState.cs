@@ -15,7 +15,7 @@ namespace Tetris
 
         public abstract void Activate(IStateData data, bool resetState);
 
-        public void Deactivate()
+        public virtual void Deactivate()
         {
 
         }
@@ -25,11 +25,7 @@ namespace Tetris
 
         }
 
-        public void Initialize()
-        {
-        
-        }
-
+        public abstract void Initialize();
 
         public void OnGUI()
         {
@@ -40,7 +36,6 @@ namespace Tetris
         {
         
         }
-
 
         public void OnUiAction(GameObject pressedGo, object p)
         {

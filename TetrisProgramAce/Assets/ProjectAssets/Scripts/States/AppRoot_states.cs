@@ -77,6 +77,7 @@ namespace Tetris
                     Debug.LogWarning("Error! Cannot find state: " + id);
                     newState = mStates[EAppStateId.MainMenu];
                     newState = mStates[EAppStateId.Game];
+                    newState = mStates[EAppStateId.Pause];
                 }
                 else
                 {
@@ -114,7 +115,7 @@ namespace Tetris
 
             mStates[EAppStateId.Game] = new GameState();
             mStates[EAppStateId.MainMenu] = new MainMenuState();
-            // mStates[EAppStateId.Pause] = new PauseState();
+            mStates[EAppStateId.Pause] = new PauseState();
             //mStates[EAppStateId.GameOver] = new GameOverState();
 
             foreach (KeyValuePair<EAppStateId, AppState> statePair in mStates)
@@ -124,7 +125,7 @@ namespace Tetris
             }
 
             SetState(EAppStateId.MainMenu);
-            //mCurState.Initialize();
+            mCurState.Initialize();
         }
 
         private void UpdateStates()

@@ -7,9 +7,22 @@ namespace Tetris
     {
         private FiguresManager figuresManager;
 
+        public override void Initialize()
+        {
+            mId = EAppStateId.Game;
+        }
+
         public override void Activate(IStateData data, bool resetState)
         {
-            Application.LoadLevel("GameField");
+            if (resetState == false)
+            {
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                Application.LoadLevel("GameField");
+            }
         }
 
         public override void OnLevelWasLoaded(int level) 
@@ -23,8 +36,16 @@ namespace Tetris
             {
                 figuresManager.Update();
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                AppRoot.Instance.Pause();
+            }
         }
 
+        public override void Deactivate()
+        {
 
+        }
     }
 }

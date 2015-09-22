@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Assets\CommonScripts\UserData.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\GUI\MainMenu.cs" />
+    <Compile Include="Assets\ProjectAssets\Scripts\GUI\PauseMenu.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\RayTest.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\ShaderUsing.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot.cs" />
@@ -91,6 +90,7 @@
     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\FiguresManager.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\GameState.cs" />
     <Compile Include="Assets\ProjectAssets\Scripts\States\MainMenuState\MainMenuState.cs" />
+    <Compile Include="Assets\ProjectAssets\Scripts\States\PauseState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\Custom\TransparentCustomShader.shader" />
