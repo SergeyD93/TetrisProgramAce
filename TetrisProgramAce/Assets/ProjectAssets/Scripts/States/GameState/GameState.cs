@@ -20,6 +20,7 @@ namespace Tetris
             }
             else
             {
+                UserData.Instance.ResetScore();
                 Time.timeScale = 1;
                 Application.LoadLevel("GameField");
             }

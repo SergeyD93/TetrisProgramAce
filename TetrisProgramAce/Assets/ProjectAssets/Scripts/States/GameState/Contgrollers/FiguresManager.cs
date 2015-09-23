@@ -21,11 +21,14 @@ namespace Tetris
         private List<GameObject> mBlocksForDestroying;
         private string mPathToFigure;
 
+        private int mFiguresCounter;
+
         public FiguresManager()
         {
             mFiguresCreator = new FiguresGenerator();
             mBlocksDestroyer = new BlocksDestroyer();
             mBlocksDestroyer.BlockDestroyed += OnAllBlocksDestroyed;
+            mFiguresCounter = 0;
 
             CreateFigure();
         }
@@ -69,6 +72,23 @@ namespace Tetris
             if(mCurentFigureController == null)
             {
                 SetCurentFigure();
+            }
+            CheckLevel();
+        }
+
+        void CheckLevel()
+        {
+            if (mFiguresCounter < 7)
+            {
+                if (mFiguresCounter == 6)
+                {
+                    UserData.Instance.SetLevel(2);
+                }
+                else if (mFiguresCounter == 3)
+                {
+                    UserData.Instance.SetLevel(1);
+                }
+                mFiguresCounter++;
             }
         }
 
@@ -115,6 +135,12 @@ namespace Tetris
                 Ray ray = new Ray(new Vector2(wall.transform.position.x, i), Vector3.right);
                 hits = Physics.RaycastAll(ray, rayDistance);
                 Debug.DrawRay(ray.origin, ray.direction, Color.blue, rayDistance);
+
+                if (i == 20 && hits.Length > 0)
+                {
+                    AppRoot.Instance.GameOver();
+                    return;
+                }
 
                 if (hits.Length >= 10)
                 {

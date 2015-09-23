@@ -15,13 +15,19 @@ namespace Tetris
         public override void Activate(IStateData data, bool resetState)
         {
             Time.timeScale = 0;
-
-            mGUICanvas = GameObject.Instantiate(Resources.Load("GUI/PauseMenu/PauseMenu") as GameObject);
+            if (mGUICanvas == null)
+            {
+                mGUICanvas = GameObject.Instantiate(Resources.Load("GUI/PauseMenu/PauseMenu") as GameObject);
+            }
+            else
+            {
+                mGUICanvas.SetActive(true);
+            }
         }
 
         public override void Deactivate()
         {
-            GameObject.Destroy(mGUICanvas);
+            mGUICanvas.SetActive(false);
         }
 
         public override void Update()

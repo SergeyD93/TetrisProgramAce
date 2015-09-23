@@ -55,6 +55,7 @@
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot_custom.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppRoot_states.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\AppState.cs" />
+     <Compile Include="Assets\ProjectAssets\Scripts\States\GameOverState.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\BlocksDestroyer.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\AbstractFigureController.cs" />
      <Compile Include="Assets\ProjectAssets\Scripts\States\GameState\Contgrollers\Figures\IfigureController.cs" />

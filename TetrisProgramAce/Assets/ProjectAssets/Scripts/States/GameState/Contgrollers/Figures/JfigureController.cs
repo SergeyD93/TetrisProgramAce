@@ -6,7 +6,7 @@ namespace Tetris
 {
     public class JfigureController : AbstractFigureController
     {
-        public JfigureController()
+        public JfigureController() : base()
         {
         
         }

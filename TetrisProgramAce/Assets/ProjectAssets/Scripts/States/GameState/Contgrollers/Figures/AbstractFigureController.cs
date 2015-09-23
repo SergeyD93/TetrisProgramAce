@@ -28,11 +28,11 @@ namespace Tetris
         protected int mPositionIndex = 0;
         protected int mNumOfPositions;
 
-        private float mStepTime = 0.5f;
+        private float mStepTime;
 
         public AbstractFigureController()
         {
-        
+
         }
 
         public AbstractFigureController(GameObject figure)
@@ -40,8 +40,29 @@ namespace Tetris
             SetFigure(figure);
         }
 
+        private void SetSpeed()
+        {
+            switch (UserData.Instance.mLevel)
+            {
+                case 0:
+                    mStepTime = 0.5f;
+                    break;
+                case 1:
+                    mStepTime = 0.2f;
+                    break;
+                case 2:
+                    mStepTime = 0.1f;
+                    break;
+                default:
+                    mStepTime = 0.5f;
+                    break;
+            }
+        }
+
         public void SetFigure(GameObject figure)
         {
+            SetSpeed();
+
             mCurentFigure = figure;
 
             Cube0 = mCurentFigure.transform.FindChild("Cube0").gameObject;
@@ -121,11 +142,11 @@ namespace Tetris
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                mStepTime = 0.1f;
+                mStepTime = 0.05f;
             }
             if (Input.GetKeyUp(KeyCode.DownArrow))
             {
-                mStepTime = 0.5f;
+                SetSpeed();
             }
         }
 

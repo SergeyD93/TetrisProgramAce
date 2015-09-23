@@ -18,9 +18,9 @@ namespace Tetris
             }
         }
 
-        public int mLevel;
         public int mScore;
         public int mLines;
+        public int mLevel;
 
 
         private UserData()
@@ -28,6 +28,17 @@ namespace Tetris
             mLevel = 0;
             mScore = 0;
             mLines = 0;
+        }
+
+        public void SetLevel(int level)
+        {
+            mLevel = level;
+            if (AppRoot.Instance.State == AppRoot.Instance.GetState(EAppStateId.Game))
+            {
+                GameObject score = GameObject.Find("Level");
+                score.GetComponent<UnityEngine.UI.Text>().text = mLevel.ToString();
+            }
+        
         }
 
         public void AddScore(int numberOfLines)
@@ -68,6 +79,13 @@ namespace Tetris
                 GameObject lines = GameObject.Find("Lines");
                 lines.GetComponent<UnityEngine.UI.Text>().text = mLines.ToString();
             }
+        }
+
+        public void ResetScore()
+        {
+            mScore = 0;
+            mLines = 0;
+            mLevel = 0;
         }
     }
 }

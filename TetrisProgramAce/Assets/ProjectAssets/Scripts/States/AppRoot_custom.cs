@@ -16,5 +16,10 @@ namespace Tetris
         {
             StartCoroutine(coroutineMethod);
         }
+
+        public void GameOver()
+        {
+            SetState(EAppStateId.GameOver);
+        }
     }
 }

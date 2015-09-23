@@ -7,7 +7,7 @@ namespace Tetris
 
     public class ZfigureController : AbstractFigureController
     {
-        public ZfigureController()
+        public ZfigureController() : base()
         {
         
         }

@@ -98,7 +98,8 @@ namespace Tetris
     {
         MainMenu = 0,
         Game,
-        Pause
+        Pause,
+        GameOver
     };
     #endregion
     ///////////////////////////////////////////////////////////////////////////

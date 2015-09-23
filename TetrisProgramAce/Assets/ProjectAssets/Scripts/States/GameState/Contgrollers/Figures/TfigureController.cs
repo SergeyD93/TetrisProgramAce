@@ -6,7 +6,7 @@ namespace Tetris
 {
     public class TfigureController : AbstractFigureController 
     {
-        public TfigureController()
+        public TfigureController() : base()
         {
         
         }

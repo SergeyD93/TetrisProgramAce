@@ -5,7 +5,7 @@ namespace Tetris
 {
     public class OfigureController : AbstractFigureController
     {
-        public OfigureController()
+        public OfigureController() : base()
         {
         
         }
