@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Tetris
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : ScriptableObject
     {
         static GameObject mAboutWindow;
         static GameObject mRulesWindow;

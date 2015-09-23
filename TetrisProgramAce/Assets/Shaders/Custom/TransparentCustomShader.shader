@@ -1,19 +1,21 @@
-﻿Shader "Custom/TransparentCustomShader" {
-	Properties {
-    _Color ("Main Color", Color) = (1,1,1,1)
-
-}
-SubShader
+﻿Shader "Custom/TransparentCustomShader"
 {
-
-	Tags {"Queue" = "Transparent"}
-	Lighting Off
-         ZWrite Off
-         Cull Back
-	Blend SrcAlpha OneMinusSrcAlpha
-	Color[_Color]
-	 Pass {
-         }
-}
+	Properties
+	{
+		_Color ("Main Color", Color) = (1,1,1,1)
+	}
+	SubShader
+	{
+		Tags {"Queue" = "Transparent"}
+		Pass
+		{
+			Material
+			{
+				Diffuse [_Color]
+			}
+		Lighting On
+		Blend SrcAlpha OneMinusSrcAlpha
+		}
+	}
 	FallBack "Diffuse"
 }
